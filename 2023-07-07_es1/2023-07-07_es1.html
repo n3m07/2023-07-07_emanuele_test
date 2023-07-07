@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="w-screen h-screen bg-blue-300 flex justify-center items-center">
+    <section
+      id="display"
+      class="w-[80%] h-4/6 flex flex-col justify-start items-center border border-black bg-blue-500"
+    >
+      <div
+        id="list"
+        class="w-full h-4/6 p-[1rem] gap-[0.5rem] flex flex-col justify-start items-center"
+      ></div>
+      <div
+        id="btns"
+        class="w-full h-2/6 p-[1rem] flex justify-between items-center"
+      >
+        <button
+          id="btnBest"
+          class="bg-white border border-black rounded-xl px-[0.5rem]"
+        >
+          Ordina Per Migliore
+        </button>
+        <button
+          id="btnWorst"
+          class="bg-white border border-black rounded-xl px-[0.5rem]"
+        >
+          Ordina Per Peggiore
+        </button>
+      </div>
+    </section>
+    <!--js-->
+    <script>
+      let json = `[
+        { "id": 1, "fullname": "mario rossi", "avg": 6 },
+        { "id": 2, "fullname": "luigi verdi", "avg": 4 },
+        { "id": 3, "fullname": "peach pink", "avg": 8 },
+        { "id": 4, "fullname": "wario rossi", "avg": 9 }
+      ]`;
+      let obj = JSON.parse(json);
+      console.log(obj);
+
+      function $(id) {
+        return document.getElementById(id);
+      }
+      let display = $("display");
+      const btnBest = $("btnBest");
+      const btnWorst = $("btnWorst");
+      const list = $("list");
+
+      function iterateObj(arr) {
+        arr.forEach((el) => {
+          let person = document.createElement("span");
+          person.textContent = el.fullname;
+          person.classList.add(
+            "bg-blue-700",
+            "px-[0.5rem]",
+            "border",
+            "border-black",
+            "rounded-xl",
+            "text-white"
+          );
+          list.appendChild(person);
+        });
+        return;
+      }
+      iterateObj(obj);
+
+      btnBest.addEventListener("click", () => {
+        let bestObj = obj.sort(function (a, b) {
+          return b.avg - a.avg;
+        });
+        iterate(bestObj);
+      });
+
+      btnWorst.addEventListener("click", () => {
+        let worstObj = obj.sort(function (a, b) {
+          return a.avg - b.avg;
+        });
+        iterate(worstObj);
+      });
+
+      function iterate(arrObj) {
+        list.innerHTML = "";
+        arrObj.forEach((el) => {
+          let person = document.createElement("span");
+          person.textContent = el.fullname;
+          person.classList.add(
+            "bg-blue-700",
+            "px-[0.5rem]",
+            "border",
+            "border-black",
+            "rounded-xl",
+            "text-white"
+          );
+          list.appendChild(person);
+        });
+      }
+    </script>
+  </body>
+</html>
