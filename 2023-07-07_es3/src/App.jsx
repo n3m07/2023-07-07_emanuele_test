@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import "./App.css";
 
 /*Ex 1
@@ -41,7 +41,7 @@ function App() {
             Search
           </button>
         </div>
-        <div>
+        <div className="w-full h-5/6 flex justify-center items-center gap-[0.5rem] p-[0.5rem] bg-red-500">
           <Iterate />
         </div>
       </div>
@@ -49,15 +49,17 @@ function App() {
   );
 }
 
-function Iterate(props) {
-  arrPeople.map((el) => {
-    <div>{el.name}</div>;
-    <div key={el.fullname}>
-      <span>{el.fullname}</span>
-      <span>{el.avg}</span>
-      <span>{el.gender}</span>
-    </div>;
-  });
+function Iterate() {
+   arrPeople.map((el) => {
+    <>
+      <div>{el.name}</div>;
+      <div key={el.fullname}>
+        <span>{el.fullname}</span>
+        <span>{el.avg}</span>
+        <span>{el.gender}</span>
+      </div>;
+    </>
+  })
 }
 
 export default App;
